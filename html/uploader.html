@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=390, initial-scale=1" />
+<title>SiteSnap — Upload</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #F3F4F6;
+    --surface: #fff;
+    --text: #111827;
+    --muted: #6B7280;
+    --border: #E5E7EB;
+    --accent: #0F766E;
+    --accent-dark: #0D9488;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    width: 390px;
+    margin: 0 auto;
+    min-height: 100vh;
+    font-family: Inter, system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+  }
+  .phone {
+    min-height: 844px;
+    background: var(--bg);
+    padding: 20px 20px 32px;
+    display: flex;
+    flex-direction: column;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+  .mark {
+    width: 36px; height: 36px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #0F766E, #14B8A6);
+    color: #fff;
+    display: grid;
+    place-items: center;
+    font-weight: 700;
+    font-size: 14px;
+  }
+  .brand h1 { font-size: 18px; font-weight: 700; }
+  .brand p { font-size: 12px; color: var(--muted); font-weight: 500; }
+  label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    margin-bottom: 8px;
+  }
+  input[type="text"], textarea {
+    width: 100%;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    border-radius: 12px;
+    padding: 14px 16px;
+    font: inherit;
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+  .picker {
+    flex: 1;
+    min-height: 280px;
+    border: 2px dashed #99F6E4;
+    background: #F0FDFA;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    text-align: center;
+    padding: 24px;
+  }
+  .cam {
+    width: 72px; height: 72px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    display: grid;
+    place-items: center;
+    font-size: 28px;
+    box-shadow: 0 8px 20px rgba(15,118,110,0.35);
+  }
+  .picker strong { font-size: 16px; }
+  .picker span { font-size: 13px; color: var(--muted); max-width: 220px; }
+  textarea { min-height: 88px; resize: none; margin-bottom: 24px; }
+  .upload {
+    width: 100%;
+    border: 0;
+    background: var(--accent);
+    color: #fff;
+    font: inherit;
+    font-size: 17px;
+    font-weight: 700;
+    padding: 18px;
+    border-radius: 14px;
+    box-shadow: 0 4px 12px rgba(15,118,110,0.3);
+  }
+  .hint {
+    text-align: center;
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 14px;
+  }
+</style>
+</head>
+<body>
+  <div class="phone">
+    <div class="brand">
+      <div class="mark">SS</div>
+      <div>
+        <h1>SiteSnap</h1>
+        <p>Daily site photos</p>
+      </div>
+    </div>
+
+    <label for="site">Site name</label>
+    <input id="site" type="text" value="42 River Rd — reno" />
+
+    <div class="picker" role="button" aria-label="Take or choose photo">
+      <div class="cam">📷</div>
+      <strong>Take or choose photo</strong>
+      <span>Tap to open camera or gallery</span>
+    </div>
+
+    <label for="note">Note (optional)</label>
+    <textarea id="note" placeholder="e.g. North wall framing complete"></textarea>
+
+    <button class="upload">Upload</button>
+    <p class="hint">No login needed on site</p>
+  </div>
+</body>
+</html>
