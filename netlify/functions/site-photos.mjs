@@ -6,6 +6,7 @@ import {
   loadSites,
   findSiteById,
   listPhotoMetas,
+  deletePhotosByDate,
 } from "./lib/store.mjs";
 
 export async function handler(event) {
@@ -15,11 +16,33 @@ export async function handler(event) {
   }
   const denied = requireAdmin(event, origin);
   if (denied) return denied;
-  if (event.httpMethod !== "GET") {
-    return json(405, { error: "Method not allowed" }, origin);
-  }
+
   try {
     await ensureSeeded();
+
+    if (event.httpMethod === "DELETE") {
+      const body = event.body ? JSON.parse(event.body) : {};
+      const qs = event.queryStringParameters || {};
+      const siteId = String(body.siteId || qs.siteId || "").trim();
+      const date = String(body.date || qs.date || "").trim();
+      if (!siteId || !date) {
+        return json(400, { error: "siteId and date required" }, origin);
+      }
+      const { sites } = await loadSites();
+      if (!findSiteById(sites, siteId)) {
+        return json(404, { error: "Site not found" }, origin);
+      }
+      const result = await deletePhotosByDate(siteId, date);
+      if (!result.ok) {
+        return json(400, { error: result.error }, origin);
+      }
+      return json(200, { ok: true, deleted: result.deleted }, origin);
+    }
+
+    if (event.httpMethod !== "GET") {
+      return json(405, { error: "Method not allowed" }, origin);
+    }
+
     const siteId = event.queryStringParameters?.siteId;
     if (!siteId) return json(400, { error: "siteId required" }, origin);
     const { sites } = await loadSites();
@@ -39,6 +62,8 @@ export async function handler(event) {
           id: site.id,
           name: site.name,
           uploadToken: site.uploadToken,
+          status: site.status || "active",
+          archived: site.archived === true,
         },
         dates: dates.map((d) => ({
           date: d,
