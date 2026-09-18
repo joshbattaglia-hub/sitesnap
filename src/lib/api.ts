@@ -19,11 +19,15 @@ export async function api<T = unknown>(
   return data as T;
 }
 
+export type SiteStatus = "active" | "complete" | "on_hold";
+
 export type SiteSummary = {
   id: string;
   name: string;
   uploadToken: string;
   createdAt?: string;
+  status: SiteStatus;
+  archived: boolean;
   photoCount: number;
   dateCount: number;
   lastUploadAt: string | null;
@@ -38,4 +42,10 @@ export type PhotoMeta = {
   originalFilename: string;
   blobKey: string;
   contentType: string;
+};
+
+export const STATUS_LABELS: Record<SiteStatus, string> = {
+  active: "Active",
+  complete: "Complete",
+  on_hold: "On hold",
 };
