@@ -17,9 +17,9 @@ You cannot see other sites or past photos.
 
 ### Admin
 1. Go to `/admin`
-2. Enter the admin password (set in Netlify env `ADMIN_PASSWORD`)
+2. Enter the admin password (Netlify env `ADMIN_PASSWORD`)
 3. Browse sites → date folders → photos
-4. Create/rename sites and copy each site’s uploader link
+4. Create/rename sites and copy each site's uploader link
 
 ## Demo sites (seeded on first boot)
 
@@ -37,7 +37,7 @@ netlify env:set ADMIN_PASSWORD "your-strong-password"
 
 Optional: `SESSION_SECRET` for signing the admin session cookie (defaults to `ADMIN_PASSWORD`).
 
-Storage: Netlify Blobs (`sitesnap` store). Photos under `siteId/YYYY-MM-DD/` using **Australia/Melbourne** calendar date.
+Storage: Netlify Blobs (`sitesnap` store). Photos under `siteId/YYYY-MM-DD/` using **Australia/Melbourne** calendar date. HTTPS only (Netlify default).
 
 ## Stack
 
